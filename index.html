@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Safety Route App — AI for Safer Roads Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#071B2C;
+    --navy2:#0B2740;
+    --cyan:#25D5E8;
+    --blue:#5AA7FF;
+    --green:#9EEC6A;
+    --yellow:#FBD35B;
+    --orange:#FF955A;
+    --red:#FF5D73;
+    --white:#F7FBFF;
+    --muted:#9DB2C5;
+    --glass:rgba(255,255,255,.075);
+    --stroke:rgba(255,255,255,.16);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:#03101C;
+    color:var(--white);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  .deck{width:100%;}
+  .slide{
+    width:100vw;
+    min-height:100vh;
+    padding:56px 72px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 82% 16%, rgba(37,213,232,.18), transparent 34%),
+      radial-gradient(circle at 20% 88%, rgba(90,167,255,.16), transparent 36%),
+      linear-gradient(135deg,var(--navy),#04111F 70%);
+    page-break-after:always;
+  }
+  .slide::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:52px 52px;
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.8), transparent 88%);
+    pointer-events:none;
+  }
+  .slide > *{position:relative; z-index:1}
+  .kicker{font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan); font-size:14px; margin-bottom:16px;}
+  h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif; margin:0; line-height:.98; letter-spacing:-.04em;}
+  h1{font-size:86px; max-width:970px;}
+  h2{font-size:58px; max-width:930px; margin-bottom:26px;}
+  h3{font-size:30px; letter-spacing:-.02em; line-height:1.12;}
+  p{font-size:22px; line-height:1.48; color:#DCEBFA; max-width:860px; margin:18px 0 0;}
+  .subtitle{font-size:26px; color:#C7DAEC; max-width:850px; margin-top:24px;}
+  .footer{position:absolute; left:72px; right:72px; bottom:34px; display:flex; justify-content:flex-end; align-items:center; color:rgba(126,149,170,.55); font-size:13px; z-index:2;}
+  .tag{border:1px solid var(--stroke); background:var(--glass); color:#DCEBFA; padding:9px 13px; border-radius:999px; font-weight:700; font-size:13px; display:inline-flex; gap:8px; align-items:center;}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:38px; align-items:center; width:100%;}
+  .row-37{display:grid; grid-template-columns:.9fr 1.1fr; gap:46px; align-items:center; width:100%;}
+  .three{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; width:100%; margin-top:28px;}
+  .card{border:1px solid var(--stroke); background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.045)); border-radius:28px; padding:26px; box-shadow:0 22px 80px rgba(0,0,0,.22);}
+  .card p{font-size:18px; margin-top:12px; color:#BCD0E3;}
+  .big-number{font-size:72px; font-family:"Space Grotesk"; font-weight:800; color:var(--cyan); line-height:1;}
+  .hero-map{height:520px; border-radius:34px; border:1px solid var(--stroke); background:
+    linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),
+    radial-gradient(circle at 64% 38%, rgba(255,93,115,.34), transparent 18%),
+    radial-gradient(circle at 30% 70%, rgba(251,211,91,.22), transparent 16%),
+    linear-gradient(30deg, transparent 48%, rgba(37,213,232,.34) 49%, rgba(37,213,232,.34) 51%, transparent 52%),
+    linear-gradient(150deg, transparent 43%, rgba(158,236,106,.28) 44%, rgba(158,236,106,.28) 46%, transparent 47%),
+    linear-gradient(90deg, transparent 54%, rgba(90,167,255,.28) 55%, rgba(90,167,255,.28) 57%, transparent 58%),
+    #0B243B;
+    position:relative; overflow:hidden;
+  }
+  .road{position:absolute; height:8px; background:rgba(255,255,255,.28); border-radius:999px; transform-origin:left center; box-shadow:0 0 18px rgba(37,213,232,.2)}
+  .r1{width:490px; left:28px; top:120px; transform:rotate(18deg)} .r2{width:530px; left:90px; top:260px; transform:rotate(-10deg)} .r3{width:430px; left:220px; top:400px; transform:rotate(24deg)} .r4{width:440px; left:290px; top:90px; transform:rotate(84deg); background:rgba(255,93,115,.75)} .r5{width:280px; left:70px; top:382px; transform:rotate(-54deg); background:rgba(251,211,91,.78)}
+  .pin{position:absolute; width:22px; height:22px; border-radius:50%; background:var(--red); box-shadow:0 0 0 10px rgba(255,93,115,.16),0 0 32px rgba(255,93,115,.65)}
+  .p1{left:430px;top:180px}.p2{left:520px;top:342px}.p3{left:184px;top:363px;background:var(--yellow);box-shadow:0 0 0 10px rgba(251,211,91,.15)}
+  .phone{width:315px; height:620px; border-radius:46px; border:10px solid #111B2A; background:#061421; box-shadow:0 34px 120px rgba(0,0,0,.45); padding:18px; margin:auto; position:relative;}
+  .phone::before{content:""; position:absolute; top:12px; left:50%; transform:translateX(-50%); width:90px; height:8px; background:#1D2B3D; border-radius:99px;}
+  .screen{height:100%; border-radius:32px; background:linear-gradient(180deg,#0B2A44,#061421); overflow:hidden; padding:28px 18px;}
+  .mockup-placeholder{height:100%; border:2px dashed rgba(37,213,232,.45); border-radius:28px; display:flex; align-items:center; justify-content:center; text-align:center; color:#8CD9E7; font-weight:800; font-size:18px; padding:22px; background:rgba(37,213,232,.045)}
+  .route-card{border-radius:22px; padding:18px; background:rgba(255,255,255,.08); border:1px solid var(--stroke); margin-top:14px;}
+  .bar{height:12px; border-radius:999px; background:rgba(255,255,255,.12); overflow:hidden; margin-top:12px}.fill{height:100%; border-radius:999px; background:linear-gradient(90deg,var(--green),var(--yellow),var(--red));}
+  .matrix{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:26px}.metric{padding:20px; border-radius:24px; background:rgba(255,255,255,.075); border:1px solid var(--stroke)}.metric .label{font-size:14px; color:var(--muted); font-weight:800; text-transform:uppercase; letter-spacing:.08em}.metric .value{font-family:"Space Grotesk"; font-size:34px; font-weight:800; margin-top:8px;}
+  .formula{font-family:"Space Grotesk"; font-size:28px; line-height:1.35; background:rgba(255,255,255,.08); border:1px solid var(--stroke); border-radius:28px; padding:28px; margin-top:24px;}
+  .risk-scale{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:28px}.risk{border-radius:20px; padding:18px; color:#061421; font-weight:900}.low{background:var(--green)}.mid{background:var(--yellow)}.high{background:var(--orange)}.crit{background:var(--red); color:white}
+  .flow{display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-top:32px; align-items:stretch}.step{border:1px solid var(--stroke); background:rgba(255,255,255,.075); border-radius:24px; padding:20px; min-height:150px}.step b{font-family:"Space Grotesk"; display:block; font-size:24px; margin-bottom:12px}.step span{color:#B8CBDD; font-size:16px; line-height:1.35; display:block;}
+  .team{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:36px}.avatar{width:72px; height:72px; border-radius:24px; background:linear-gradient(135deg,var(--cyan),var(--blue)); display:flex; align-items:center; justify-content:center; font-family:"Space Grotesk"; font-size:28px; color:#04111F; font-weight:900; margin-bottom:18px;}
+  .hero-team{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:980px;margin-top:42px}.member{border:1px solid rgba(37,213,232,.28);background:linear-gradient(180deg,rgba(37,213,232,.14),rgba(255,255,255,.045));border-radius:24px;padding:18px 20px;box-shadow:0 22px 70px rgba(0,0,0,.18)}.member .role{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--cyan);font-weight:900}.member .name{font-family:"Space Grotesk";font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:6px}.two-line-close{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:34px}.two-line-close .line{font-family:"Space Grotesk";font-size:54px;line-height:1.05;font-weight:800;letter-spacing:-.045em;max-width:none;white-space:nowrap}.two-line-close .line:first-child{padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.18)}
+  .quote{font-family:"Space Grotesk"; font-size:54px; line-height:1.05; letter-spacing:-.04em; max-width:1000px}.accent{color:var(--cyan)}
+  .split-title{font-size:64px;}
+  .note{font-size:15px; color:#89A0B6; max-width:960px; margin-top:20px;}
+  .mini-map{height:330px; border-radius:30px; border:1px solid var(--stroke); background:#092138; position:relative; overflow:hidden;}
+  .legend{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}.legend span{font-size:14px; color:#AFC2D4}.dot{width:11px; height:11px; border-radius:50%; display:inline-block; margin-right:6px}.green{background:var(--green)}.yellow{background:var(--yellow)}.red{background:var(--red)}.cyan{background:var(--cyan)}
+  .tiny{font-size:14px;color:#91A8BC}
+  @media print{.slide{width:13.333in;height:7.5in;min-height:7.5in;padding:48px 60px}.footer{left:60px;right:60px}.phone{transform:scale(.82)} h1{font-size:72px} h2{font-size:48px} p{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<section class="slide">
+  <div class="kicker">AI for Safer Roads Innovation Challenge 2026</div>
+  <h1>Safety Route App</h1>
+  <p class="subtitle">A risk-aware routing app that helps users choose not only the fastest road, but the safer one.</p>
+  <div style="margin-top:34px; display:flex; gap:12px; flex-wrap:wrap">
+    <span class="tag">Route Risk Scoring</span><span class="tag">Vehicle-Aware Routing</span><span class="tag">Speed-Unsafe Segments</span>
+  </div>
+  <div class="hero-team">
+    <div class="member"><div class="role">Team Member</div><div class="name">Abdulhamit Celik</div></div>
+    <div class="member"><div class="role">Team Member</div><div class="name">Abdulsamet Atas</div></div>
+    <div class="member"><div class="role">Team Member</div><div class="name">Ahmad Habibulloh</div></div>
+  </div>
+  <div class="footer"><span></span><span>01</span></div>
+</section>
+
+<section class="slide">
+  <div class="row">
+    <div>
+      <div class="kicker">The missing layer</div>
+      <h2>Fastest route is not always the safest route.</h2>
+      <p>Most navigation apps optimize for time and distance. Safety Route App adds a third dimension: road risk.</p>
+      <p>Our app already scores route options by lower risk. For this challenge, we strengthen that feature with ADB road-segment safety data.</p>
+    </div>
+    <div class="hero-map">
+      <div class="road r1"></div><div class="road r2"></div><div class="road r3"></div><div class="road r4"></div><div class="road r5"></div>
+      <div class="pin p1"></div><div class="pin p2"></div><div class="pin p3"></div>
+    </div>
+  </div>
+  <div class="footer"><span></span><span>02</span></div>
+</section>
+
+<section class="slide">
+  <div class="row-37">
+    <div>
+      <div class="kicker">App-first solution</div>
+      <h2 class="split-title">ADB data lives inside the route decision.</h2>
+      <p>Not a separate dashboard. Not only a report. The dataset powers safer route scoring, vehicle-specific risk, and route explanation inside Safety Route App.</p>
+      <div class="flow" style="grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px">
+        <div class="step"><b>01</b><span>User selects destination and vehicle type</span></div>
+        <div class="step"><b>02</b><span>App scores candidate routes by risk</span></div>
+        <div class="step"><b>03</b><span>App recommends safer route with explanation</span></div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="screen"><div class="mockup-placeholder">APP MOCKUP SLOT<br><br>Embed current Safety Route App screen here</div></div>
+    </div>
+  </div>
+  <div class="footer"><span></span><span>03</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">ADB data integration</div>
+  <h2>From road-segment data to route intelligence.</h2>
+  <div class="flow">
+    <div class="step"><b>01</b><span>Road geometry, road class, land use</span></div>
+    <div class="step"><b>02</b><span>Speed limit, median speed, 85th percentile speed</span></div>
+    <div class="step"><b>03</b><span>Percent over limit and traffic exposure</span></div>
+    <div class="step"><b>04</b><span>Segment-level Speed Safety Score</span></div>
+    <div class="step"><b>05</b><span>Route-level risk recommendation</span></div>
+  </div>
+  <p class="note">The challenge data supports both technical scoring and visual identification of Speed-Unsafe Segments.</p>
+  <div class="footer"><span></span><span>04</span></div>
+</section>
+
+<section class="slide">
+  <div class="row">
+    <div>
+      <div class="kicker">Speed Safety Score</div>
+      <h2>Every road segment gets a clear risk label.</h2>
+      <p>The score combines speeding behavior, speed excess, traffic exposure, land use vulnerability, and road class.</p>
+      <div class="formula">Risk Score = Speeding Behavior + Speed Excess + Traffic Exposure + Vulnerability + Road Class</div>
+    </div>
+    <div>
+      <div class="risk-scale">
+        <div class="risk low">Low<br>0–25</div><div class="risk mid">Medium<br>26–50</div><div class="risk high">High<br>51–75</div><div class="risk crit">Critical<br>76–100</div>
+      </div>
+      <div class="card" style="margin-top:22px">
+        <h3>What users see</h3>
+        <p>“This route contains 4 high-risk segments caused by speeding exposure and high 85th percentile speed.”</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span></span><span>05</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Vehicle-aware safety</div>
+  <h2>Same road. Different vehicle. Different risk.</h2>
+  <div class="three">
+    <div class="card"><h3>Motorcycle</h3><p>More sensitive to high-speed corridors, unsafe intersections, and urban conflict areas.</p></div>
+    <div class="card"><h3>Car</h3><p>Balanced scoring between travel time, safety risk, and traffic exposure.</p></div>
+    <div class="card"><h3>Bicycle</h3><p>More sensitive to high-speed corridors, unsafe crossings, urban conflict zones, and segments with heavy traffic exposure.</p></div>
+  </div>
+  <p>Vehicle selection makes the recommendation practical, not generic.</p>
+  <div class="footer"><span></span><span>06</span></div>
+</section>
+
+<section class="slide">
+  <div class="row">
+    <div>
+      <div class="kicker">Route comparison</div>
+      <h2>We show the trade-off between time and safety.</h2>
+      <p>Instead of hiding the logic, the app compares candidate routes and explains the safest practical option.</p>
+    </div>
+    <div>
+      <div class="route-card"><h3>Fastest Route · 24 min</h3><div class="bar"><div class="fill" style="width:82%"></div></div><p>High risk · 5 unsafe segments</p></div>
+      <div class="route-card"><h3>Balanced Route · 28 min</h3><div class="bar"><div class="fill" style="width:46%"></div></div><p>Recommended · avoids critical corridors</p></div>
+      <div class="route-card"><h3>Safest Route · 31 min</h3><div class="bar"><div class="fill" style="width:22%"></div></div><p>Lowest risk · adds 7 minutes</p></div>
+    </div>
+  </div>
+  <div class="footer"><span></span><span>07</span></div>
+</section>
+
+<section class="slide">
+  <div class="row-37">
+    <div>
+      <div class="kicker">Explainable recommendation</div>
+      <h2 class="split-title">Beyond just re-routing, we're explaining.</h2>
+      <p>Every recommendation tells users why the safer route was selected and which risk factors changed the decision.</p>
+    </div>
+    <div class="card">
+      <h3>Recommended safer route</h3>
+      <p>✓ Avoids 4 high-risk segments</p>
+      <p>✓ Reduces speeding exposure by 38%</p>
+      <p>✓ Adds only 5 minutes</p>
+      <p>✓ Better suited for motorcycle travel</p>
+    </div>
+  </div>
+  <div class="footer"><span></span><span>08</span></div>
+</section>
+
+<section class="slide">
+  <div class="row">
+    <div>
+      <div class="kicker">Map + agency value</div>
+      <h2>Unsafe segments become visible and actionable.</h2>
+      <p>The app can visualize critical corridors for users, while giving agencies a priority list for enforcement, signage, traffic calming, or speed-limit review.</p>
+      <div class="legend"><span><i class="dot green"></i>Low</span><span><i class="dot yellow"></i>Medium</span><span><i class="dot red"></i>Critical</span><span><i class="dot cyan"></i>Selected route</span></div>
+    </div>
+    <div class="mini-map">
+      <div class="road" style="width:440px;left:20px;top:70px;transform:rotate(12deg);background:var(--green)"></div>
+      <div class="road" style="width:530px;left:90px;top:165px;transform:rotate(-6deg);background:var(--red)"></div>
+      <div class="road" style="width:380px;left:180px;top:255px;transform:rotate(25deg);background:var(--yellow)"></div>
+      <div class="road" style="width:300px;left:320px;top:45px;transform:rotate(72deg);background:var(--cyan)"></div>
+      <div class="pin p1"></div><div class="pin p2"></div>
+    </div>
+  </div>
+  <div class="footer"><span></span><span>09</span></div>
+</section>
+
+<section class="slide">
+  <div class="two-line-close">
+    <div class="line">Today’s maps tell people how to arrive <span class="accent">faster</span>.</div>
+    <div class="line">Safety Route App helps them arrive <span class="accent">safer</span>.</div>
+  </div>
+  <div class="footer"><span></span><span>10</span></div>
+</section>
+
+</div>
+</body>
+</html>
