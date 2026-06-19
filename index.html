@@ -85,9 +85,12 @@ p{margin:0;color:#cbd5e1;font-size:20px;line-height:1.52}
 .risk-note{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;color:#dbeafe;font-size:15px}
 .risk-note .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 12px var(--yellow)}
 .risk-result{margin-top:16px;padding:14px 18px;border-radius:18px;background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.24);text-align:center;font-family:'Space Grotesk',sans-serif;font-size:20px;color:var(--cyan)}
-.team-summary{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
-.team-summary .glass-card{padding:22px 24px;min-height:110px;display:flex;flex-direction:column;justify-content:center;text-align:center}
-.team-summary-title{font-family:'Space Grotesk',sans-serif;font-size:18px;color:#fff;margin-bottom:8px}
+.team-summary{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;align-items:stretch}
+.team-summary .glass-card{padding:22px 28px;min-height:126px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.team-summary-title{font-family:'Space Grotesk',sans-serif;font-size:18px;color:#fff;margin-bottom:10px}
+.team-summary p{font-size:18px;line-height:1.42;color:#fff;max-width:455px;margin:0 auto}
+.team-summary .line{display:block}
+.team-summary .small-line{display:block;font-size:15px;color:var(--muted);margin-top:6px}
 .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative;width:100%;margin-top:24px}
 .flow::before{content:"";position:absolute;left:7%;right:7%;top:44px;height:3px;background:#1e293b;border-radius:999px;z-index:0}
 .flow::after{content:"";position:absolute;top:42px;left:7%;height:7px;width:17%;border-radius:999px;background:linear-gradient(90deg,transparent,var(--cyan),var(--yellow),transparent);box-shadow:0 0 22px var(--cyan);animation:light-step 5.6s ease-in-out infinite;z-index:1}
@@ -121,6 +124,13 @@ p{margin:0;color:#cbd5e1;font-size:20px;line-height:1.52}
 @keyframes orbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .fadeup{animation:fadeup .85s ease both}.delay1{animation-delay:.12s}.delay2{animation-delay:.24s}.delay3{animation-delay:.36s}
 @keyframes fadeup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.slide4-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;width:100%}
+.slide4-panel{height:100%;display:flex;flex-direction:column;justify-content:flex-start}
+.slide4-panel .metric-row{margin-top:10px}
+.slide4-panel p{font-size:19px}
+.slide4-note{margin-top:18px;padding:14px 16px;border-radius:16px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.18);font-size:16px;color:#dbeafe;text-align:center}
+.slide6-phone-wrap{display:flex;align-items:center;justify-content:center;height:100%;padding-top:8px;padding-bottom:26px}
+.slide6-phone-wrap .phone-mockup{transform:translateY(-16px)}
 .navhint{position:fixed;right:22px;bottom:16px;color:#64748b;font-size:12px;z-index:50}
 </style>
 </head>
@@ -175,8 +185,8 @@ p{margin:0;color:#cbd5e1;font-size:20px;line-height:1.52}
   <div class="logo-corner"></div>
   <h2 class="slide-title">ADB data → app intelligence</h2>
   <div class="content-area">
-    <div class="two-column">
-      <div class="fadeup">
+    <div class="slide4-grid">
+      <div class="glass-card slide4-panel fadeup">
         <p>The challenge data becomes a <strong>road-risk layer</strong> inside the existing app. ADB means <strong>Asian Development Bank</strong>; GIS means <strong>Geographic Information System</strong>.</p>
         <div class="risk-formula-wrap">
           <div class="risk-formula-head">How route risk is built</div>
@@ -190,19 +200,19 @@ p{margin:0;color:#cbd5e1;font-size:20px;line-height:1.52}
           <div class="risk-note"><span class="dot"></span><span>Weighted together for each route and each user type</span></div>
           <div class="risk-result">Route Risk Score → Low · Caution · Avoid</div>
         </div>
-        <div class="metric-row"><i class="fa-solid fa-gauge-high"></i><div><b>Speeding behavior</b><div class="small">Percent over speed limit and 85th percentile speed.</div></div></div>
-        <div class="metric-row"><i class="fa-solid fa-road"></i><div><b>Exposure</b><div class="small">Traffic-weighted sample, segment length, and route overlap.</div></div></div>
-        <div class="metric-row"><i class="fa-solid fa-map-location-dot"></i><div><b>Context</b><div class="small">Road class, geometry, land use, crash or flood open data.</div></div></div>
+        <div class="slide4-note">Each route is evaluated consistently, then adjusted for scooter, bicycle, or pedestrian use.</div>
       </div>
-      <div class="glass-card yellow fadeup delay1">
+      <div class="glass-card yellow slide4-panel fadeup delay1">
         <h3>Risk scale inside the app</h3>
         <div class="risk-scale"><div class="scale-box green"></div><div class="scale-box yellow-bg"></div><div class="scale-box red"></div></div>
-        <div class="three-column" style="margin-top:26px;gap:14px;">
+        <div class="three-column" style="margin-top:24px;gap:14px;">
           <div class="glass-card center" style="padding:18px;"><div class="highlight-num" style="color:var(--green);">22</div><p class="small">Low</p></div>
           <div class="glass-card center" style="padding:18px;"><div class="highlight-num">54</div><p class="small">Caution</p></div>
           <div class="glass-card center" style="padding:18px;"><div class="highlight-num" style="color:var(--red);">81</div><p class="small">Avoid</p></div>
         </div>
-        <p style="margin-top:22px;">The score changes route ranking for each user type instead of being a decorative badge.</p>
+        <div class="metric-row"><i class="fa-solid fa-gauge-high"></i><div><b>Speeding behavior</b><div class="small">Percent over speed limit and 85th percentile speed.</div></div></div>
+        <div class="metric-row"><i class="fa-solid fa-road"></i><div><b>Exposure</b><div class="small">Traffic-weighted sample, segment length, and route overlap.</div></div></div>
+        <div class="metric-row"><i class="fa-solid fa-map-location-dot"></i><div><b>Context</b><div class="small">Road class, geometry, land use, crash or flood open data.</div></div></div>
       </div>
     </div>
   </div>
@@ -227,7 +237,7 @@ p{margin:0;color:#cbd5e1;font-size:20px;line-height:1.52}
   <h2 class="slide-title">Interactive navigation</h2>
   <div class="content-area">
     <div class="two-column">
-      <div class="phone-mockup fadeup"><div class="mockup-inner"></div><div class="mockup-overlay"><p style="color:var(--yellow);font-weight:700;font-size:14px;">SAFER ROUTE DETECTED</p><p class="small" style="margin:0;">Avoids 2 high-risk zones with only +1 minute.</p></div></div>
+      <div class="slide6-phone-wrap fadeup"><div class="phone-mockup"><div class="mockup-inner"></div><div class="mockup-overlay"><p style="color:var(--yellow);font-weight:700;font-size:14px;">SAFER ROUTE DETECTED</p><p class="small" style="margin:0;">Avoids 2 high-risk zones with only +1 minute.</p></div></div></div>
       <div class="glass-card fadeup delay1">
         <h3>Live route explanation</h3>
         <p>The app does not hide the logic. It explains why a route is safer for the selected user type.</p>
@@ -276,11 +286,19 @@ p{margin:0;color:#cbd5e1;font-size:20px;line-height:1.52}
     <div class="team-summary fadeup">
       <div class="glass-card">
         <div class="team-summary-title">Current base</div>
-        <p style="font-size:18px;color:#fff;">All members are based in <strong>Taiwan</strong> and are pursuing a master’s degree at <strong>National Taiwan University of Science and Technology</strong>.</p>
+        <p>
+          <span class="line">Based in <strong>Taiwan</strong></span>
+          <span class="line">Master’s students at <strong>NTUST</strong></span>
+          <span class="small-line">National Taiwan University of Science and Technology</span>
+        </p>
       </div>
       <div class="glass-card yellow">
         <div class="team-summary-title">International team</div>
-        <p style="font-size:18px;color:#fff;">The team brings together <strong>two members from Turkey</strong> and <strong>one member from Indonesia</strong>.</p>
+        <p>
+          <span class="line">Built by experts from different nationalities</span>
+          <span class="line"><strong>2</strong> from Turkey · <strong>1</strong> from Indonesia</span>
+          <span class="small-line">Developer · AI Researcher · Strategy</span>
+        </p>
       </div>
     </div>
     <div class="team-grid">
